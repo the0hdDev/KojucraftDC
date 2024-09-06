@@ -40,5 +40,5 @@ client.on('interactionCreate', async interaction => {
 // eventHandler(client)
 
 
-client.login(process.env.DISCORD_KEY)
+client.login()
 
