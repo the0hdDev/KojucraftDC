@@ -4,6 +4,8 @@ const {Client, IntentsBitField, SlashCommandBuilder} = require('discord.js');
 const eventHandler = require('./handlers/eventHandler');
 const pingcommand = require('./pingcommand');
 
+// MTI3NjgyN + env
+
 const client = new Client ({
     intents: [
         IntentsBitField.Flags.Guilds,
