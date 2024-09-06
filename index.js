@@ -1,5 +1,8 @@
 require('dotenv').config();
-const {Client, IntentsBitField} = require('discord.js')
+const gamer = "gamer"
+const {Client, IntentsBitField, SlashCommandBuilder} = require('discord.js');
+const eventHandler = require('./handlers/eventHandler');
+const pingcommand = require('./pingcommand');
 
 const client = new Client ({
     intents: [
@@ -10,9 +13,30 @@ const client = new Client ({
     ]
 })
 
-client.on('ready', (c) => {
-    console.log(`${c.user.tag} is running!`)
-})
+client.once('ready', async () => {
+    try {
+        const guild = client.guilds.cache.get('1195924636676935830'); // Replace with your Guild ID
+        await guild.commands.set(commands);
+        console.log('Slash commands registered');
+    } catch (error) {
+        console.error(error);
+    }
+    console.log(`Logged in as ${client.user.tag}!`);
+});
 
-client.login('MTI3NjgyNjkwMzA3NjE0NzIxMA.GG9ZME.9eIbNAu7wnhiyV-Of2-KtYN2XjyYcqahVp4lZc')
+// Command handling
+client.on('interactionCreate', async interaction => {
+    if (!interaction.isCommand()) return;
+
+    if (interaction.commandName === 'ping') {
+        await interaction.reply('Pong!');
+    }
+});
+
+
+
+// eventHandler(client)
+
+
+client.login(process.env.DISCORD_KEY)
 
